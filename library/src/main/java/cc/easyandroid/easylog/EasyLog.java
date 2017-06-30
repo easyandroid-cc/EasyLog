@@ -75,7 +75,7 @@ public class EasyLog {
         if (DEBUG) {
             Log.wtf(TAG, buildMessage(format, args), tr);
         }
-    }   //text
+    }   //text  ddd
 
     /**
      * Formats the caller's provided message and prepends useful info like
