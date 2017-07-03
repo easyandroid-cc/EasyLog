@@ -1,8 +1,9 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "26.0.0"
+    buildToolsVersion '23.0.1'
 
     defaultConfig {
         minSdkVersion 14
@@ -16,7 +17,34 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    lintOptions {
+        abortOnError false
+    }
 }
-
+//如果你开源库中有中文注释在moudel的build.gradle加入格式
+allprojects {
+    repositories {
+        jcenter()
+    }
+    //加上这些
+    tasks.withType(Javadoc) {
+        options{ encoding "UTF-8"
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
+        }
+    }
+}
 dependencies {
+}
+publish {
+    userOrg = 'cgpllx'      //bintray注册的用户名
+    groupId = 'cc.easyandroid'         //compile引用时的第1部分groupId
+    artifactId = 'EasyLog'     //compile引用时的第2部分项目名
+    publishVersion = '1.0.0'    //compile引用时的第3部分版本号
+    desc = 'easy log '
+    website = 'https://github.com/easyandroid-cc/EasyLog'
 }
